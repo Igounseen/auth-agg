@@ -8,6 +8,7 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.oauth2.config.annotation.configurers.ClientDetailsServiceConfigurer;
 import org.springframework.security.oauth2.config.annotation.web.configuration.AuthorizationServerConfigurerAdapter;
+import org.springframework.security.oauth2.config.annotation.web.configuration.EnableAuthorizationServer;
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerEndpointsConfigurer;
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerSecurityConfigurer;
 import org.springframework.security.oauth2.provider.ClientDetailsService;
@@ -22,6 +23,7 @@ import org.springframework.security.oauth2.provider.token.TokenStore;
  * @date 2019/11/13
  */
 @Configuration
+@EnableAuthorizationServer
 public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdapter {
 
     @Autowired
@@ -51,7 +53,7 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
                 // 客户端Id
                 .withClient("c1")
                 // 客户端密钥
-                .secret(new BCryptPasswordEncoder().encode("serect"))
+                .secret(new BCryptPasswordEncoder().encode("secret"))
                 // 资源列表
                 .resourceIds("res1")
                 // 授权类型
@@ -74,9 +76,9 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
     @Override
     public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
         endpoints
-                // 密码模式需要
+                // 设置认证管理器，密码模式需要
                 .authenticationManager(authenticationManager)
-                // 授权码模式需要
+                // 设置授权码服务，授权码模式需要
                 .authorizationCodeServices(authorizationCodeServices)
                 // 令牌管理服务
                 .tokenServices(tokenServices())
@@ -103,6 +105,11 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
                 .allowFormAuthenticationForClients();
     }
 
+    /**
+     * 令牌管理服务
+     *
+     * @return
+     */
     @Bean
     public AuthorizationServerTokenServices tokenServices() {
         DefaultTokenServices services = new DefaultTokenServices();

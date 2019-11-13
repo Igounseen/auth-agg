@@ -5,6 +5,7 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.Arrays;
@@ -27,11 +28,10 @@ public class SpringDataUserDetailService implements UserDetailsService {
             return null;
         }
         List<String> permissions = findPermissionsByUserId(user.getId());
-        UserDetails userDetails = User.withUsername(user.getUsername())
+        return User.withUsername(user.getUsername())
                 .password(user.getPassword())
                 .authorities(permissions.toArray(new String[0]))
                 .build();
-        return userDetails;
     }
 
     /**
@@ -41,8 +41,8 @@ public class SpringDataUserDetailService implements UserDetailsService {
      * @return
      */
     private UserDto getUserByUsername(String username) {
-        UserDto user1 = new UserDto(1L, "张三", "123456");
-        UserDto user2 = new UserDto(2L, "李四", "123456");
+        UserDto user1 = new UserDto(1L, "张三", new BCryptPasswordEncoder().encode("123456"));
+        UserDto user2 = new UserDto(2L, "李四", new BCryptPasswordEncoder().encode("123456"));
         Map<String, UserDto> map = new HashMap<>(16);
         map.put(user1.getUsername(), user1);
         map.put(user2.getUsername(), user2);
