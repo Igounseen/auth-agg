@@ -1,0 +1,7 @@
+spring:
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    username: root
+    password: admin
+    url: jdbc:mysql://localhost:3306/swx_oauth?characterEncoding=utf8&useSSL=false&allowMultiQueries=true
+    # initialization-mode: always
