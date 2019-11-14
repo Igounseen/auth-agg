@@ -19,6 +19,7 @@ import org.springframework.security.oauth2.provider.token.AuthorizationServerTok
 import org.springframework.security.oauth2.provider.token.DefaultTokenServices;
 import org.springframework.security.oauth2.provider.token.TokenEnhancerChain;
 import org.springframework.security.oauth2.provider.token.TokenStore;
+import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenConverter;
 
 import javax.sql.DataSource;
 import java.util.Arrays;
@@ -31,11 +32,6 @@ import java.util.Arrays;
 @EnableAuthorizationServer
 public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdapter {
 
-    @Autowired
-    JdbcTemplate jdbcTemplate;
-
-    @Autowired
-    private DataSource dataSource;
 
     @Autowired
     private TokenStore tokenStore;
@@ -48,6 +44,9 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
 
     @Autowired
     private ClientDetailsService clientDetailsService;
+
+    @Autowired
+    private JwtAccessTokenConverter accessTokenConverter;
 
     /**
      * ⭐⭐⭐⭐⭐
@@ -131,7 +130,7 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
 
         // jwt 密钥增强
         TokenEnhancerChain tokenEnhancerChain = new TokenEnhancerChain();
-        tokenEnhancerChain.setTokenEnhancers(Arrays.asList());
+        tokenEnhancerChain.setTokenEnhancers(Arrays.asList(accessTokenConverter));
         services.setTokenEnhancer(tokenEnhancerChain);
 
         // 令牌有效时期 默认2小时

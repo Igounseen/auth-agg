@@ -1,4 +1,4 @@
-package com.swx.auth.auth.config;
+package com.swx.auth.user.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -14,10 +14,7 @@ import org.springframework.security.oauth2.provider.token.store.JwtTokenStore;
 @Configuration
 public class TokenConfig {
 
-    /**
-     * 对称密钥
-     */
-    private String SIGN_KEY = "sign123";
+    private String SIGNING_KEY = "sign123";
 
     /**
      * 令牌存储策略
@@ -26,16 +23,17 @@ public class TokenConfig {
      */
     @Bean
     public TokenStore tokenStore() {
-        // 生成JWT令牌
+        // JWT 令牌
         return new JwtTokenStore(accessTokenConverter());
     }
 
     @Bean
     public JwtAccessTokenConverter accessTokenConverter() {
         JwtAccessTokenConverter converter = new JwtAccessTokenConverter();
-        // 对称密钥，资源服务器使用该密钥来认证
-        converter.setSigningKey(SIGN_KEY);
+        // 对称密钥，资源服务器也使用该密钥进行验证
+        converter.setSigningKey(SIGNING_KEY);
         return converter;
     }
+
 
 }
