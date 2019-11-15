@@ -8,7 +8,6 @@ public class HelloTest {
 
     @Test
     public void f1() {
-
-        System.out.println(BCrypt.hashpw("secret", BCrypt.gensalt()));
+        System.out.println(BCrypt.hashpw("111111", BCrypt.gensalt()));
     }
 }
