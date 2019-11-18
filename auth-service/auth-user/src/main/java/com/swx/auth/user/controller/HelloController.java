@@ -8,10 +8,10 @@ import org.springframework.web.bind.annotation.RestController;
  * @author swx
  */
 @RestController
-@RequestMapping("/echo")
+@RequestMapping("/register")
 public class HelloController {
 
-    @GetMapping("/")
+    @GetMapping("/hello")
     public String e() {
         return "hello";
     }

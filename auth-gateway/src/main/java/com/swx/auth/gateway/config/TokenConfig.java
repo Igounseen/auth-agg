@@ -1,20 +1,19 @@
-package com.swx.auth.user.config;
+package com.swx.auth.gateway.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.oauth2.provider.token.TokenStore;
-import org.springframework.security.oauth2.provider.token.store.InMemoryTokenStore;
 import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenConverter;
 import org.springframework.security.oauth2.provider.token.store.JwtTokenStore;
 
 /**
  * @author shiwenxiang
- * @date 2019/11/13
+ * @date 2019/11/18
  */
 @Configuration
 public class TokenConfig {
-
     private String SIGNING_KEY = "sign123";
+
     /**
      * 令牌存储策略
      *

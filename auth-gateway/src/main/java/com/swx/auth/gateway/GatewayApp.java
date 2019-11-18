@@ -1,17 +1,19 @@
-package com.swx.auth.user;
+package com.swx.auth.gateway;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
+import org.springframework.cloud.netflix.zuul.EnableZuulProxy;
 
 /**
  * @author shiwenxiang
- * @date 2019/11/13
+ * @date 2019/11/18
  */
 @EnableEurekaClient
+@EnableZuulProxy
 @SpringBootApplication
-public class UserApp {
+public class GatewayApp {
     public static void main(String[] args) {
-        SpringApplication.run(UserApp.class, args);
+        SpringApplication.run(GatewayApp.class, args);
     }
 }

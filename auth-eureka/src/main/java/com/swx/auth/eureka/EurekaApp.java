@@ -1,17 +1,17 @@
-package com.swx.auth.user;
+package com.swx.auth.eureka;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
+import org.springframework.cloud.netflix.eureka.server.EnableEurekaServer;
 
 /**
  * @author shiwenxiang
- * @date 2019/11/13
+ * @date 2019/11/18
  */
-@EnableEurekaClient
+@EnableEurekaServer
 @SpringBootApplication
-public class UserApp {
+public class EurekaApp {
     public static void main(String[] args) {
-        SpringApplication.run(UserApp.class, args);
+        SpringApplication.run(EurekaApp.class, args);
     }
 }

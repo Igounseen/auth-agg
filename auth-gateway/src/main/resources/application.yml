@@ -1,0 +1,19 @@
+spring:
+  application:
+    name: auth-gateway
+server:
+  port: 9000
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8000/eureka/
+zuul:
+  routes:
+    oauth:
+      path: /auth-auth/**
+      serviceId: auth-auth
+      strip-prefix: false
+    user:
+      path: /auth-user/**
+      serviceId: auth-user
+      strip-prefix: false

@@ -1,6 +1,8 @@
 package com.swx.auth.user.controller;
 
+import com.swx.auth.user.dto.UserDto;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -16,6 +18,8 @@ public class UserController {
     @GetMapping("/r1")
     @PreAuthorize("hasAnyAuthority('p1')")
     public String r1() {
+        UserDto userDTO = (UserDto) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        System.out.println("User Info:" + userDTO);
         return "访问资源r1";
     }
 

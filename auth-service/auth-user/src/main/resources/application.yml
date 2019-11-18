@@ -1,2 +1,16 @@
 server:
   port: 8090
+  servlet:
+    context-path: /auth-user
+
+spring:
+  application:
+    name: auth-user
+
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8000/eureka
+  instance:
+    prefer-ip-address: true
