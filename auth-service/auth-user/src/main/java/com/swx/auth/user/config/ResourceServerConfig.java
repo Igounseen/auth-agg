@@ -16,7 +16,7 @@ import org.springframework.security.oauth2.provider.token.TokenStore;
 @EnableResourceServer
 public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
 
-    public static final String RESOURCE_ID = "res1";
+    public static final String RESOURCE_ID = "user";
 
     @Autowired
     private TokenStore tokenStore;

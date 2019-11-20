@@ -15,6 +15,11 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/user")
 public class UserController {
 
+    @GetMapping("/r0")
+    public String r4() {
+        return "访问资源";
+    }
+
     @GetMapping("/r1")
     @PreAuthorize("hasAnyAuthority('p1')")
     public String r1() {
@@ -35,10 +40,5 @@ public class UserController {
         return "访问资源r3";
     }
 
-    @GetMapping("/r4")
-    @PreAuthorize("hasAnyAuthority('p4')")
-    public String r4() {
-        return "访问资源r4";
-    }
 
 }

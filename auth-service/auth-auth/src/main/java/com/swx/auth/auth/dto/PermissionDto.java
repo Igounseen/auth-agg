@@ -9,8 +9,12 @@ public class PermissionDto {
 
     private String code;
 
-    private String description;
+    private String name;
 
-    private String url;
+    private String permission;
+
+    private String type;
+
+    private String sort;
 
 }

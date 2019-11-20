@@ -1,5 +1,6 @@
 package com.swx.auth.auth.service;
 
+import com.alibaba.fastjson.JSONObject;
 import com.swx.auth.auth.dao.UserDao;
 import com.swx.auth.auth.dto.UserDto;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,8 +20,7 @@ import java.util.Map;
  * @author shiwenxiang
  * @date 2019/11/13
  */
-@Service
-public class SpringDataUserDetailService implements UserDetailsService {
+public class CustomUserDetailService implements UserDetailsService {
 
     @Autowired
     private UserDao userDao;
@@ -32,13 +32,16 @@ public class SpringDataUserDetailService implements UserDetailsService {
             // 如果查不到用户，则返回null, 由provider抛异常
             return null;
         }
+        String password = user.getPassword();
         List<String> permissions = userDao.findPermissionByUserId(user.getId());
         String[] permissionArray = new String[permissions.size()];
         permissions.toArray(permissionArray);
-        UserDetails userDetails = User.withUsername(user.getUsername()).password(user.getPassword()).authorities(permissionArray).build();
+        UserDetails userDetails = User.withUsername(JSONObject.toJSONString(user))
+                .password(password)
+                .authorities(permissionArray)
+                .build();
         return userDetails;
     }
-
 
 
 }

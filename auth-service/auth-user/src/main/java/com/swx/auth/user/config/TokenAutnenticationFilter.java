@@ -34,8 +34,7 @@ public class TokenAutnenticationFilter extends OncePerRequestFilter {
             String principal = jsonObject.getString("principal");
             // 权限信息
             JSONArray authoritiesArray = jsonObject.getJSONArray("authorities");
-            UserDto userDto = new UserDto();
-            userDto.setUsername(principal);
+            UserDto userDto = JSON.parseObject(principal, UserDto.class);
             UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(userDto,
                     null,
                     AuthorityUtils.createAuthorityList(authoritiesArray.toArray(new String[0])));

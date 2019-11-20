@@ -1,5 +1,6 @@
 package com.swx.auth.auth.config;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -24,6 +25,7 @@ import org.springframework.security.oauth2.provider.token.TokenEnhancerChain;
 import org.springframework.security.oauth2.provider.token.TokenStore;
 import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenConverter;
 
+import javax.annotation.PostConstruct;
 import javax.sql.DataSource;
 import java.util.Arrays;
 
@@ -33,6 +35,7 @@ import java.util.Arrays;
  */
 @Configuration
 @EnableAuthorizationServer
+@Slf4j
 public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdapter {
 
 

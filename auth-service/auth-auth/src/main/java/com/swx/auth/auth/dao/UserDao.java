@@ -23,7 +23,7 @@ public class UserDao {
     public UserDto getUserByUsername(String usernmae) {
         String sql = "select id,username,password from user where username = ?";
         List<UserDto> result = jdbcTemplate.query(sql, new Object[]{usernmae}, new BeanPropertyRowMapper<>(UserDto.class));
-        if (result == null && result.size() <= 0) {
+        if (result == null || result.size() <= 0) {
             return null;
         }
         return result.get(0);
@@ -39,7 +39,7 @@ public class UserDao {
                 ")";
         List<PermissionDto> result = jdbcTemplate.query(sql, new Object[]{userId}, new BeanPropertyRowMapper<>(PermissionDto.class));
         List<String> permissions = new ArrayList<>();
-        result.forEach(p -> permissions.add(p.getCode()));
+        result.forEach(p -> permissions.add(p.getPermission()));
         return permissions;
 
     }

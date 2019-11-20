@@ -15,8 +15,8 @@ import org.springframework.security.oauth2.provider.token.TokenStore;
 @Configuration
 public class ResouceServerConfig {
 
-    public static final String RESOURCE_ID = "res1";
-    public static final String RESOURCE_ID2 = "res2";
+    public static final String RESOURCE_USER = "user";
+    public static final String RESOURCE_BUSINESS = "business";
 
     @Configuration
     @EnableResourceServer
@@ -29,7 +29,6 @@ public class ResouceServerConfig {
         public void configure(ResourceServerSecurityConfigurer resources) {
             resources
                     .tokenStore(tokenStore)
-                    .resourceId(RESOURCE_ID)
                     .stateless(true);
         }
 
@@ -53,7 +52,7 @@ public class ResouceServerConfig {
         public void configure(ResourceServerSecurityConfigurer resources) throws Exception {
             resources
                     // 资源ID
-                    .resourceId(RESOURCE_ID2)
+                    .resourceId(RESOURCE_USER)
                     .tokenStore(tokenStore)
                     .stateless(true);
         }
