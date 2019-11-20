@@ -3,6 +3,7 @@ package com.swx.auth.auth.service;
 import com.alibaba.fastjson.JSONObject;
 import com.swx.auth.auth.dao.UserDao;
 import com.swx.auth.auth.dto.UserDto;
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -39,6 +40,7 @@ public class CustomUserDetailService implements UserDetailsService {
         UserDetails userDetails = User.withUsername(JSONObject.toJSONString(user))
                 .password(password)
                 .authorities(permissionArray)
+                .accountLocked(!StringUtils.equals("0", user.getLocked()))
                 .build();
         return userDetails;
     }

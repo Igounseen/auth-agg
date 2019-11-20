@@ -21,7 +21,7 @@ public class UserDao {
     private JdbcTemplate jdbcTemplate;
 
     public UserDto getUserByUsername(String usernmae) {
-        String sql = "select id,username,password from user where username = ?";
+        String sql = "select id,username,password,locked from user where username = ?";
         List<UserDto> result = jdbcTemplate.query(sql, new Object[]{usernmae}, new BeanPropertyRowMapper<>(UserDto.class));
         if (result == null || result.size() <= 0) {
             return null;

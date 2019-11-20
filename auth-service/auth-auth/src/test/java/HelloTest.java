@@ -23,7 +23,7 @@ public class HelloTest {
 
     @Test
     public void f3(){
-        UserDto user = new UserDto(1L,"swx","asdf");
+        UserDto user = new UserDto(1L,"swx","asdf","0");
         System.out.println(JSONObject.toJSONString(user));
     }
 }

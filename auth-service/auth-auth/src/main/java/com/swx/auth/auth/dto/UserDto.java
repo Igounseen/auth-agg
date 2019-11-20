@@ -17,8 +17,12 @@ import javax.persistence.Transient;
 public class UserDto {
 
     private Long id;
+
     private String username;
+
     @JSONField(serialize = false)
     private String password;
+
+    private String locked;
 
 }
