@@ -37,7 +37,6 @@ public class MyTokenEnhancer implements TokenEnhancer {
         }
         Map<String, Object> map = new HashMap<>(16);
         User user = (User) authentication.getPrincipal();
-        log.info("============================" + JSONObject.toJSONString(user));
         UserDto userDto = JSONObject.parseObject(user.getUsername(), UserDto.class);
         map.put("id", userDto.getId());
         map.put("username", userDto.getUsername());

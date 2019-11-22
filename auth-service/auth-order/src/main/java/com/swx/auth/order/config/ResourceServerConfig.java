@@ -1,4 +1,4 @@
-package com.swx.auth.user.config;
+package com.swx.auth.order.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
@@ -16,7 +16,6 @@ import org.springframework.security.oauth2.provider.token.TokenStore;
 @EnableResourceServer
 public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
 
-    public static final String RESOURCE_ID = "user";
 
     @Autowired
     private TokenStore tokenStore;
@@ -24,8 +23,6 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
     @Override
     public void configure(ResourceServerSecurityConfigurer resources) throws Exception {
         resources
-                // 资源ID
-                .resourceId(RESOURCE_ID)
                 .tokenStore(tokenStore)
                 .stateless(true);
     }
@@ -36,8 +33,8 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
         http
                 .authorizeRequests()
                 .antMatchers("/**").permitAll()
-                //  .antMatchers("/**").access("#oauth2.hasScope('ROLE_ADMIN')")
                 .and()
-                .csrf().disable();
+                .csrf().disable()
+                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
     }
 }

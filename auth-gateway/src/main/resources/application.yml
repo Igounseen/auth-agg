@@ -18,3 +18,7 @@ zuul:
       path: /auth-user/**
       serviceId: auth-user
       strip-prefix: false
+    order:
+      path: /auth-order/**
+      serviceId: auth-order
+      strip-prefix: false

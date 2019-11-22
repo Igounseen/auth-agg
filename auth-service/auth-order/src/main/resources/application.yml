@@ -1,0 +1,20 @@
+server:
+  port: 8095
+  servlet:
+    context-path: /auth-order
+
+
+spring:
+  application:
+    name: auth-order
+
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8000/eureka
+  instance:
+    prefer-ip-address: true
+feign:
+  hystrix:
+    enabled: true

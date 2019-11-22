@@ -1,6 +1,9 @@
 package com.swx.auth.user.controller;
 
+import com.swx.auth.user.client.OrderClient;
 import com.swx.auth.user.dto.UserDto;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,6 +17,9 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/user")
 public class UserController {
+
+    @Autowired
+    OrderClient orderClient;
 
     @GetMapping("/r0")
     public String r4() {
@@ -31,6 +37,8 @@ public class UserController {
     @GetMapping("/r2")
     @PreAuthorize("hasAnyAuthority('p2')")
     public String r2() {
+        UserDto userDTO = (UserDto) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
         return "访问资源r2";
     }
 
