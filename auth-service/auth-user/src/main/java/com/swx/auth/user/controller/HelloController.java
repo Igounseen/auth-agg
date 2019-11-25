@@ -23,7 +23,7 @@ public class HelloController {
 
     @GetMapping("/hello")
     public String e() {
-       // log.info(" feign 调用：{}", orderClient.getOrder());
+        log.info(" feign 调用：{}", orderClient.getOrder());
         return "hello";
     }
 }

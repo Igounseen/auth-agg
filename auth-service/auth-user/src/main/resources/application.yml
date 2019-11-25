@@ -14,3 +14,8 @@ eureka:
       defaultZone: http://localhost:8000/eureka
   instance:
     prefer-ip-address: true
+
+
+logging:
+  level:
+    com.swx.auth.user.client.OrderClient: debug

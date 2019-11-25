@@ -35,9 +35,11 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
     public void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
-                .antMatchers("/**").permitAll()
-                //  .antMatchers("/**").access("#oauth2.hasScope('ROLE_ADMIN')")
+                .anyRequest().permitAll()
+//                .antMatchers("/register/**").permitAll()
+//                .antMatchers("/user/**").authenticated()
                 .and()
-                .csrf().disable();
+                .csrf().disable()
+                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
     }
 }

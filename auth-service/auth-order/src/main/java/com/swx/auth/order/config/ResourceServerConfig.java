@@ -16,6 +16,7 @@ import org.springframework.security.oauth2.provider.token.TokenStore;
 @EnableResourceServer
 public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
 
+    public static final String RESOURCE_BUSINESS = "business";
 
     @Autowired
     private TokenStore tokenStore;
@@ -23,6 +24,7 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
     @Override
     public void configure(ResourceServerSecurityConfigurer resources) throws Exception {
         resources
+                .resourceId(RESOURCE_BUSINESS)
                 .tokenStore(tokenStore)
                 .stateless(true);
     }
@@ -32,9 +34,9 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
     public void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
-                .antMatchers("/**").permitAll()
+                .anyRequest().permitAll()
+//                .antMatchers("/order/**").authenticated()
                 .and()
-                .csrf().disable()
-                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+                .csrf().disable();
     }
 }

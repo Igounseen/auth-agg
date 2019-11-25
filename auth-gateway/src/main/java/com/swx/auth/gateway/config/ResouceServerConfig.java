@@ -62,7 +62,9 @@ public class ResouceServerConfig {
             http
                     .authorizeRequests()
                     .antMatchers("/auth-user/register/**", "/auth-user/error").permitAll()
-                    .antMatchers("/auth-user/**").authenticated();
+                    .antMatchers("/auth-user/**").authenticated()
+                    .and()
+                    .csrf().disable();
 
         }
 
@@ -78,6 +80,7 @@ public class ResouceServerConfig {
             public void configure(ResourceServerSecurityConfigurer resources) throws Exception {
                 resources
                         // 资源ID
+                        .resourceId(RESOURCE_BUSINESS)
                         .tokenStore(tokenStore)
                         .stateless(true);
             }
@@ -86,7 +89,9 @@ public class ResouceServerConfig {
             public void configure(HttpSecurity http) throws Exception {
                 http
                         .authorizeRequests()
-                        .antMatchers("/auth-order/**").authenticated();
+                        .antMatchers("/auth-order/**").authenticated()
+                        .and()
+                        .csrf().disable();
             }
 
         }
